@@ -1,4 +1,6 @@
 Abroadguille::Application.routes.draw do
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -45,6 +47,10 @@ Abroadguille::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
+  match "feed" => "rss#feed", :as => :feed, :defaults => { :format => 'rss' }
+
+
   namespace :admin do
     root :to => 'root#index'
     match "feedDatabase" => 'root#feedDatabase'
