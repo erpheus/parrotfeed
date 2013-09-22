@@ -3,16 +3,18 @@ class FeedItem
     attr_accessor :title, :content, :updated_at, :id
 
     def self.all
-    	all = Story.all.desc(:updated_date).map do |story|
-			FeedItem.create(story)
-    	end
+    	all = Story.all.desc(:updated_date)
         #Avoid feeding a possibly incomplete story
         unless all.empty?
             if Time.now - all.first.updated_date < 18 * 60
                 all = all[1..-1]
             end
         end
-        return all
+
+        return all.map do |story|
+			FeedItem.create(story)
+    	end
+        
     end
 
     def self.create(story)
