@@ -52,6 +52,10 @@ Abroadguille::Application.routes.draw do
     match "returnTwitter" => "root#returnTwitter"
   end
 
+  namespace :api do
+    resources :stories, defaults: {format: :json}
+  end
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
