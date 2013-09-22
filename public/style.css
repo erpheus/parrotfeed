@@ -41,7 +41,7 @@ body .title{
 }
 
 .text{
-  border: 1px solid grey;
+  border: 2px solid grey;
   border-bottom-width: 1px;
   border-top-width: 0;
   background-color: white;
@@ -51,20 +51,19 @@ body .title{
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   margin-top: 2em;
-  border-top-width: 1px;
+  border-top-width: 2px;
 }
 .story .text:nth-last-child(1){
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   margin-bottom: 2em;
+  border-bottom-width: 2px;
 }
 .text > img{
   height: 80px;
   margin-left: 30px;
 }
-.text > p{
-  float: left;
-}
+
 .text:after{
   content:'';
   display:block;
