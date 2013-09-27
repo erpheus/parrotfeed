@@ -11,7 +11,13 @@ $(function(){
 					for (var k = 0; k < story.texts[j].pictures.length; k++) {
 						text.append($("<img />",{
 							src: story.texts[j].pictures[k].preview_url,
-							class: "pull-right"
+							class: "pull-right",
+							on: { "click" : function(picture){
+								return function(){
+									$("#imageLightbox-image").attr("src",picture.actual_url);
+									$("#imageLightbox").lightbox(); 
+								}
+							}(story.texts[j].pictures[k])}
 						}));
 					};
 				}

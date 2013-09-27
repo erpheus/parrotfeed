@@ -4,8 +4,10 @@
     <title>Abroad Guille - My trip's feed</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/bootstrap-lightbox.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="/bootstrap-lightbox.min.js"></script>
     <script src="/js.js"></script>
   </head>
   <body>
@@ -29,6 +31,16 @@
               <a href="#"><span class="glyphicon glyphicon-camera"></span></a>
             </li>
           </ul>
+        </div>
+      </div>
+
+      <!-- image lightbox -->
+
+      <div id="imageLightbox" class="lightbox fade"  tabindex="-1" role="dialog" aria-hidden="true">
+        <div class='lightbox-dialog'>
+          <div class='lightbox-content'>
+            <img id="imageLightbox-image" src="">
+          </div>
         </div>
       </div>
       
