@@ -15,7 +15,10 @@ $(function(){
 							on: { "click" : function(picture){
 								return function(){
 									$("#imageLightbox-image").attr("src",picture.actual_url);
-									$("#imageLightbox").lightbox(); 
+									$("#imageLightbox").lightbox();
+									$(".lightbox-content").click(function(){
+										$("#imageLightbox").click();
+									});
 								}
 							}(story.texts[j].pictures[k])}
 						}));
