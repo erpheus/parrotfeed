@@ -27,7 +27,14 @@ body {
 .header{
   width: 100%;
   background: #5D9FA8;
+  margin-bottom: 20px;
 }
+
+/*.header, .date{
+    -webkit-box-shadow: inset 0 0 15px rgba(50, 50, 50, 0.4);
+  -moz-box-shadow: inset    0 0 15px rgba(50, 50, 50, 0.4);
+  box-shadow: inset         0 0 15px rgba(50, 50, 50, 0.4);
+}*/
 
 .header > .title{
   color: white;
@@ -58,9 +65,9 @@ body {
 }
 
 .story{
-  -webkit-box-shadow: 0 0 15px rgba(150, 150, 150, 0.65);
-  -moz-box-shadow:    0 0 15px rgba(150, 150, 150, 0.65);
-  box-shadow:         0 0 15px rgba(150, 150, 150, 0.65);
+  -webkit-box-shadow: 0 0 15px rgba(93, 159, 168, 0.8);
+  -moz-box-shadow:    0 0 15px rgba(93, 159, 168, 0.8);
+  box-shadow:         0 0 15px rgba(93, 159, 168, 0.8);
   border-radius: 5px;
   background-color: white;
   overflow: hidden;
@@ -70,10 +77,11 @@ body {
 .text{
   
   border-bottom: 1px solid lightgrey;
-  border-top-width: 0;
+  border-top: 1px solid #ADDDE4;
   padding: 1em;
 }
 .story .text:nth-child(1){
+  border-top-width: 0;
   /*border-top-width: 2px;*/
 }
 .story .text:nth-last-child(1){
@@ -84,6 +92,7 @@ body {
   height: 80px;
   margin-left: 30px;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 .text:after{
@@ -98,7 +107,7 @@ body {
 }
 .date, .event{
   margin: 0px auto;
-  border-radius: 15px;
+  border-radius: 5px;
   margin-top: 1em;
   margin-bottom: 1em;
   text-align: center;
@@ -117,10 +126,11 @@ body {
 }
 
 .date {
-  padding: 0.5em;
-  background-color: grey;
+  padding: 0.3em 0.2em;
+  background-color: #5D9FA8;
   color: white;
-  width: 200px;
+  width: 180px;
+  font-family: arial;
 }
 .gradient{    
   background: -moz-linear-gradient(90deg, rgba(173,221,228,0) 0%, rgba(173,221,228,1) 28%, rgba(173,221,228,1) 100%); /* ff3.6+ */
