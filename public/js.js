@@ -20,58 +20,121 @@ function dateToString(date){
 	return date.getDate() + " " + m_names[date.getMonth()] + " " + date.getFullYear();
 }
 
-$(function(){
-	var data = $.getJSON("/api/stories.json")
+function paintError(message){
+
+	if (!(typeof message == 'string' || message instanceof String)){
+		message = "There was an error getting the information";
+	}
 	var container = $("#content");
-	data.then(function(result){
 
-		var lastDate = new Date();
+	container.empty();
+	$("<div />",{
+		class: "error-message",
+		text: message
+	}).appendTo(container);
 
-		//Every story
-		for (var i = 0; i < result.length; i++) {
-			var story = result[i];
+}
 
-			//Check day change
-			var tempDate = new Date(story.updated_date);
-			if( daysBetween(tempDate,lastDate) >= 1 ){
-				$("<div />",{
-					class: "date",
-					text: dateToString(tempDate)
-				}).appendTo(container);
+function paintResults(result){
+
+	var container = $("#content");
+
+	var lastDate = new Date();
+
+	//Every story
+	for (var i = 0; i < result.length; i++) {
+		var story = result[i];
+
+		//Check day change
+		var tempDate = new Date(story.updated_date);
+		if( daysBetween(tempDate,lastDate) >= 1 ){
+			$("<div />",{
+				class: "date",
+				text: dateToString(tempDate)
+			}).appendTo(container);
+		}
+		lastDate = tempDate;
+
+		var element = $("<div />",{class: "story"});
+
+		// Every text
+		for (var j = 0; j < story.texts.length; j++) {
+			var text = $("<div />",{class: "text"});
+			if (story.texts[j].pictures !== undefined){
+
+				//Every image
+				for (var k = 0; k < story.texts[j].pictures.length; k++) {
+					text.append($("<img />",{
+						src: story.texts[j].pictures[k].preview_url,
+						class: "pull-right",
+						on: { "click" : function(picture){
+							return function(){
+								$("#imageLightbox-image").attr("src",picture.actual_url);
+								$("#imageLightbox").lightbox();
+								$(".lightbox-content").click(function(){
+									$("#imageLightbox").click();
+								});
+							}
+						}(story.texts[j].pictures[k])}
+					}));
+				};
 			}
-			lastDate = tempDate;
 
-			var element = $("<div />",{class: "story"});
-
-			// Every text
-			for (var j = 0; j < story.texts.length; j++) {
-				var text = $("<div />",{class: "text"});
-				if (story.texts[j].pictures !== undefined){
-
-					//Every image
-					for (var k = 0; k < story.texts[j].pictures.length; k++) {
-						text.append($("<img />",{
-							src: story.texts[j].pictures[k].preview_url,
-							class: "pull-right",
-							on: { "click" : function(picture){
-								return function(){
-									$("#imageLightbox-image").attr("src",picture.actual_url);
-									$("#imageLightbox").lightbox();
-									$(".lightbox-content").click(function(){
-										$("#imageLightbox").click();
-									});
-								}
-							}(story.texts[j].pictures[k])}
-						}));
-					};
-				}
-
-				text.append("<p>"+story.texts[j].content+"</p>");
-				element.append(text);
-			};
-			container.append(element);
+			text.append("<p>"+story.texts[j].content+"</p>");
+			element.append(text);
 		};
+		container.append(element);
+	};
 
-		$(".loader").remove();
+	$(".loader").remove();
+}
+
+function paintLoader(){
+
+	var container = $("#content");
+
+	container.empty();
+	$("<div />",{ class: "loader" })
+		.append($("<img />",{ src: "/ajax-loader.gif" }))
+		.appendTo(container);
+
+}
+
+function fetchStories(){
+	var data = $.ajax({
+		dataType: "json",
+		url: "/api/stories.json",
+		error: paintError
 	});
+	data.then(paintResults);
+};
+
+function setActiveLink(linkName){
+	$(".nav > li").removeClass("active");
+	$("#"+linkName+"-link").addClass("active");
+}
+
+var sammyApp = $.sammy(function() {  
+  
+    this.element_selector = '#content';  
+      
+    this.get('#/stories', function(context) {
+    	setActiveLink("stories");  
+    	context.app.swap(''); 
+    	paintLoader(); 
+    	fetchStories();
+	}); 
+
+	this.get('#/photos', function(context) {
+		setActiveLink("photos");
+		context.app.swap('');
+		paintError("This hasn't been completed yet. Check back later.");
+	});
+  
 });
+
+$(function() {  
+  sammyApp.run('#/stories');  
+});
+
+

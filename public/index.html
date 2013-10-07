@@ -8,6 +8,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="/bootstrap-lightbox.min.js"></script>
+    <script src="/sammy.min.js"></script>
     <script src="/js.js"></script>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   </head>
@@ -18,21 +19,21 @@
     <div class="spacer"></div>
     <div class="header">
 
-      <h1 class="title text-muted">Abroad Guille</h1>
+      <h1 class="title text-muted pull-left">Abroad Guille</h1>
 
-      <!-- menu -->
-      <!--<div class="header navbar-fixed-top constrained container">
-        <div class="header-menu pull-right">
-          <ul class="nav nav-pills">
-            <li class="active">
-              <a href="#"><span class="glyphicon glyphicon-th-list"></span></a>
-            </li>
-            <li>
-              <a href="#"><span class="glyphicon glyphicon-camera"></span></a>
-            </li>
-          </ul>
-        </div>
-      </div>-->
+      <div class="menu pull-right">
+        <ul class="nav nav-pills">
+          <li id="stories-link">
+            <a href="#/stories"><span class="glyphicon glyphicon-align-justify"></span></a>
+          </li>
+          <li id="photos-link">
+            <a href="#/photos"><span class="glyphicon glyphicon-camera"></span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="clear">
+      </div>
 
     </div>
 
@@ -49,10 +50,6 @@
     <div class="container constrained" id="content">
 
       <!-- content -->
-
-      <div class="loader">
-        <img src="/ajax-loader.gif" />
-      </div>
       
     </div>
   </body>
