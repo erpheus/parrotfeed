@@ -105,7 +105,7 @@ body {
   clear: both;
   float: none;
 }
-.date, .event{
+.date, .event, .loader{
   margin: 0px auto;
   border-radius: 5px;
   margin-top: 1em;
@@ -125,13 +125,19 @@ body {
   margin: 0px;
 }
 
-.date {
+.date, .loader {
   padding: 0.3em 0.2em;
   background-color: #5D9FA8;
   color: white;
   width: 180px;
   font-family: arial;
 }
+
+.loader{
+  padding: 0.5em;
+  width: 60px;
+}
+
 .gradient{    
   background: -moz-linear-gradient(90deg, rgba(173,221,228,0) 0%, rgba(173,221,228,1) 28%, rgba(173,221,228,1) 100%); /* ff3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(173,221,228,1)), color-stop(72%, rgba(173,221,228,1)), color-stop(100%, rgba(173,221,228,0))); /* safari4+,chrome */

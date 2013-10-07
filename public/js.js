@@ -71,5 +71,7 @@ $(function(){
 			};
 			container.append(element);
 		};
+
+		$(".loader").remove();
 	});
 });
