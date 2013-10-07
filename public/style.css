@@ -13,11 +13,20 @@ body {
 .line-behind{
   width: 50%;
   height: 100%;
-  border-right: 4px solid #5D9FA8;
   position: fixed;
   z-index: -4;
   margin-top:0px;
 }
+
+.line-behind div{
+  height: 100%;
+  position: absolute;
+  top:0px;
+  right: -2px;
+  width: 4px;
+  background: #5D9FA8;
+}
+
 .spacer{
   min-height: 20px;
   width: 100%;
