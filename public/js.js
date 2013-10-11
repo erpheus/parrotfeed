@@ -112,6 +112,7 @@ function fetchStories(){
 function setActiveLink(linkName){
 	$(".nav > li").removeClass("active");
 	$("#"+linkName+"-link").addClass("active");
+	$("#"+linkName+"-link > a").blur();
 }
 
 var sammyApp = $.sammy(function() {  
