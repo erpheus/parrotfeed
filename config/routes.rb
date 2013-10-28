@@ -60,6 +60,7 @@ Abroadguille::Application.routes.draw do
 
   namespace :api do
     resources :stories, defaults: {format: :json}
+    match "subscribe/:list" => "subscription#subscribe", :defaults => {:format => :json}
   end
 
   # You can have the root of your site routed with "root"

@@ -56,3 +56,30 @@ $(function() {
 });
 
 
+function openSubscribeModal(){
+	$("#subscribeModal").modal();
+	$("#subscribeButton").bind("click",subscribeSubmitted);
+}
+
+function subscribeSubmitted(){
+	$("#subscribeModal").modal('hide');
+	var subType = $("#frequencySelect").val();
+	$.ajax({
+		url: "/api/subscribe/"+subType,
+		dataType: 'json',
+		method: 'POST',
+		data: {email: $("#emailInput").val()},
+		success: function(){
+			bootbox.alert("Email correctly saved");
+		},
+		error: function(jqXHR){
+			try {
+				var message = $.parseJSON(jqXHR.responseText).value;
+				bootbox.alert(message);
+			}catch(e){
+				bootbox.alert("There was an error in the server. Please try again later.");
+			}
+		}
+	});
+}
+

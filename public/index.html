@@ -12,9 +12,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="/lib/bootstrap-lightbox/bootstrap-lightbox.min.js"></script>
+    <script src="/lib/bootbox.min.js"></script>
     <script src="/lib/sammy/sammy.min.js"></script>
     <script src="/lib/sammy/sammy.template.js"></script>
     <script src="//cdn.jsdelivr.net/isotope/1.5.25/jquery.isotope.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/i18next/1.6.3/i18next.amd.withJQuery-1.6.3.min.js"></script>
     <script src="js/js.js"></script>
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
@@ -59,7 +61,7 @@
   
       <div class="link-container">
         <p>
-          <!--<a data-toggle="tooltip" title="Subscribe with your email address" href="javascript:alert('This feature isn\'t available yet');" ><i class="fa fa-envelope fa-4x fa-fw"></i></a>-->
+          <a data-toggle="tooltip" title="Subscribe with your email address" href="javascript:openSubscribeModal();" ><i class="fa fa-envelope fa-4x fa-fw"></i></a>
           <a data-toggle="tooltip" title="Subscribe to the rss feed" href="/feed" ><i class="fa fa-rss fa-4x fa-fw"></i></a>
           <a data-toggle="tooltip" title="Follow the twitter account" href="http://twitter.com/abroadGuille" ><i class="fa fa-twitter fa-4x fa-fw"></i></a>
           <a data-toggle="tooltip" title="View all pictures on flickr" href="http://flickr.com/abroadGuille" ><i class="fa fa-flickr fa-4x fa-fw"></i></a>
@@ -78,5 +80,39 @@
       <!-- content -->
       
     </div>
+
+    <!-- Email subscribe modal -->
+
+    <div class="modal fade" id="subscribeModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Subscribe to email updates</h4>
+          </div>
+          <div class="modal-body">
+            <p>I want to receive updates every&nbsp;
+              <select id="frequencySelect">
+                <option value="daily" id="dailyFrequencyOption">day</option>
+                <option value="3days" id="3daysFrequencyOption">3 days</option>
+                <option value="weekly" id="weeklyFrequencyOption">week</option>
+              </select>
+              .
+            </p>
+            <p>My email address is&nbsp;&nbsp;<input type="text" id="emailInput" placeholder="email" style="width: 250px;"></input>.</p>
+            <p>Emails are sent ONLY if there is new content since the last update.</p>
+            <br />
+            <p>Your email address will be stored by mailchimp's service, used only for this newsletter and never shared with other third parties. There is an unsubscribe button at the bottom of each update.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="subscribeButton">Subscribe</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
   </body>
 </html>

@@ -13,6 +13,7 @@ gem "twitter"
 gem "oauth"
 gem 'scheduler_daemon'
 gem "figaro"
+gem "mailchimp-api"
 
 # Gems used only for assets and not required
 # in production environments by default.

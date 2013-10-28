@@ -17,6 +17,7 @@ class Api::StoriesController < ApplicationController
     end
   end
 
+=begin
   # GET /stories/new
   def new
     @story = Story.new
@@ -65,4 +66,6 @@ class Api::StoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+=end
 end
