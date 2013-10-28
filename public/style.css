@@ -101,9 +101,9 @@ body {
   margin-bottom: 1em;
   background-color: #5D9FA8;
   color: white;
-  padding: 1em;
+  padding: 1em 0;
   text-align: center;
-  width: 30em;
+  max-width: 30em;
 }
 
 .link-container > p {
