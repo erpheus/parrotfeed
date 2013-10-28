@@ -6,6 +6,11 @@
 .constrained{
   max-width: 786px;
 }
+
+.photo-story{
+  /*min-width: 786px;*/
+}
+
 body {
   margin-bottom: 100px;
   background: #ADDDE4;
@@ -172,3 +177,60 @@ body {
   width: 100%;
   z-index: -1;
 }
+
+
+/*.thumbnail{
+  width: 100%;
+  text-align: center;
+}*/
+
+.photo-item{
+  /*width: 21%;
+  min-width: 150px;*/
+  position: relative;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .photo-item{
+    width: 100%;
+  } 
+}
+
+.photo-container{
+  display: inline-block;
+  position: relative;
+  margin: 10px 2%;
+  max-width: 100%;
+}
+
+.photo-loading-overlay{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.3);
+  visibility: hidden;
+}
+
+.ball{
+  width: 30px;
+  height: 30px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  position: absolute;
+}
+
+.ball.blue{
+  background: #0063dc;
+  z-index: 2;
+}
+
+.ball.pink{
+  background: #ff0084;
+  z-index: 1;
+}
+
+
