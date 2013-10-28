@@ -93,6 +93,32 @@ body {
   margin: 2em 0;
 }
 
+.link-container{
+  border-radius: 5px;
+  background-color: white;
+  overflow: hidden;
+  margin: 0px auto;
+  margin-bottom: 1em;
+  background-color: #5D9FA8;
+  color: white;
+  padding: 1em;
+  text-align: center;
+  width: 30em;
+}
+
+.link-container > p {
+  margin: 0px;
+}
+
+.link-container a, .link-container a:visited {
+    color: #ADDDE4;
+    /*background-color: #ADDDE4;*/
+}
+
+.link-container a:hover, .link-container a:focus{
+  color: #FFF;
+}
+
 .text{
   
   border-bottom: 1px solid lightgrey;

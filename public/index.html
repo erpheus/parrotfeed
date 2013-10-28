@@ -3,9 +3,12 @@
   <head>
     <title>Abroad Guille - My trip's feed</title>
     <meta charset="utf-8"/>  
+
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/lib/bootstrap-lightbox/bootstrap-lightbox.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css" rel="stylesheet">
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="/lib/bootstrap-lightbox/bootstrap-lightbox.min.js"></script>
@@ -13,7 +16,9 @@
     <script src="/lib/sammy/sammy.template.js"></script>
     <script src="//cdn.jsdelivr.net/isotope/1.5.25/jquery.isotope.min.js"></script>
     <script src="js/js.js"></script>
+
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
   </head>
   <body>
     <!-- background -->
@@ -48,6 +53,24 @@
           <img id="imageLightbox-image" src="">
         </div>
       </div>
+    </div>
+
+    <div class="container constrained">
+  
+      <div class="link-container">
+        <p>
+          <!--<a data-toggle="tooltip" title="Subscribe with your email address" href="javascript:alert('This feature isn\'t available yet');" ><span class="fa fa-envelope fa-4x fa-fw"></span></a>-->
+          <a data-toggle="tooltip" title="Subscribe to the rss feed" href="/feed" ><span class="fa fa-rss fa-4x fa-fw"></span></a>
+          <a data-toggle="tooltip" title="Follow the twitter account" href="http://twitter.com/abroadGuille" ><span class="fa fa-twitter fa-4x fa-fw"></span></a>
+          <a data-toggle="tooltip" title="View all pictures on flickr" href="http://flickr.com/abroadGuille" ><span class="fa fa-flickr fa-4x fa-fw"></span></a>
+        </p>
+      </div>
+      <script>
+        $(".link-container a").tooltip({
+          delay: { show: 500, hide: 100 },
+          placement: 'bottom'
+        });
+      </script>
     </div>
     
     <div class="container constrained" id="content">
