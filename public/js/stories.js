@@ -20,6 +20,11 @@ function dateToString(date){
 	return date.getDate() + " " + m_names[date.getMonth()] + " " + date.getFullYear();
 }
 
+function replaceURLWithHTMLLinks(text) {
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(exp,"<a href='$1'>$1</a>"); 
+}
+
 function paintResults(result){
 
     var container = $("#content");
@@ -65,7 +70,7 @@ function paintResults(result){
                 };
             }
 
-            text.append("<p>"+story.texts[j].content+"</p>");
+            text.append("<p>"+replaceURLWithHTMLLinks(story.texts[j].content)+"</p>");
             element.append(text);
         };
         container.append(element);
