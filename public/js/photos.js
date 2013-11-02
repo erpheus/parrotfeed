@@ -43,16 +43,17 @@ var loadedPhotos = function(){
 		}(url, element));
 	}
 
-	var appendPhoto = function(flickrPhoto){
+	var appendPhoto = function(flickrPhoto, index){
 		var element = $(itemHtml);
+		element.data("image-index",index);
 		setUpLink(element,flickrPhoto);
 		var image = element.find("img");
 		image.attr("src",buildUrl(flickrPhoto));
 		image.load(function(element){
 			return function(){
+				gallery.isotope('insert', element);
 				totalPhotos -= 1;
 				checkFinishedLoading();
-				gallery.isotope('insert', element);
 			}
 		}(element));
 	}
@@ -69,8 +70,15 @@ var loadedPhotos = function(){
 
 	// Start isotope
 	gallery.isotope({
-		itemSelector : '.photo-item'
+		itemSelector : '.photo-item',
+		getSortData : {
+		  	index : function ( elem ) {
+		    	return elem.data('image-index');
+		  	}
+		}
     });
+    gallery.isotope({ sortBy : 'index' });
+
 
 	//Load with Flickr's JSONp the sets and the pictures.
 	var flickrURL = "http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos"
@@ -85,7 +93,7 @@ var loadedPhotos = function(){
 		totalPhotos += photoList.length;
 		for (var i = 0; i < photoList.length; i++) {
 			if (! tagsInclude(photoList[i].tags, "nowebsite")){
-				appendPhoto(photoList[i]);
+				appendPhoto(photoList[i],i);
 			}else{
 				totalPhotos -= 1;
 				checkFinishedLoading();
