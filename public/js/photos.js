@@ -48,14 +48,28 @@ var loadedPhotos = function(){
 		element.data("image-index",index);
 		setUpLink(element,flickrPhoto);
 		var image = element.find("img");
-		image.attr("src",buildUrl(flickrPhoto));
-		image.load(function(element){
+		// Bind handlers to the error and load events.
+		image.load( function(element){
 			return function(){
 				gallery.isotope('insert', element);
 				totalPhotos -= 1;
 				checkFinishedLoading();
 			}
 		}(element));
+		image.error( function(){
+			totalPhotos -= 1;
+			checkFinishedLoading();
+		});
+
+		// AFTER setting the handlers change the src to trigger the load
+		image.attr("src",buildUrl(flickrPhoto));
+
+		// In case the image has been cached
+		if (image.complete){
+			gallery.isotope('insert', element);	
+			totalPhotos -= 1;
+			checkFinishedLoading();
+		}
 	}
 
 	var tagsInclude = function(tags, tag){
