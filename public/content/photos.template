@@ -1,6 +1,11 @@
 <div class="loader">
   <img src="/ajax-loader.gif" />
 </div>
+<div class="story album-story">
+  <h3>Photo collections</h3>
+  <ul id="album-list" class="album-list nav nav-pills">
+  </ul>
+</div>
 <div class="story photo-story row" id="photo-gallery">
   <div class="photo-item col-sm-6 col-md-4 col-lg-3">
     <div class="photo-container">
@@ -14,3 +19,4 @@
   </div>
 </div>
 <script src="/js/photos.js"></script>
+<script><%= callback %></script>

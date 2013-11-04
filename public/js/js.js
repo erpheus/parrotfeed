@@ -30,6 +30,8 @@ function paintLoader(){
 
 }
 
+var isPhotosLoaded = false;
+
 var sammyApp = $.sammy(function() {
 
 	this.use("Template");  
@@ -37,16 +39,30 @@ var sammyApp = $.sammy(function() {
     this.element_selector = '#content';  
       
     this.get('#/stories', function(context) {
+    	isPhotosLoaded = false;
     	setActiveLink("stories");  
     	context.app.swap('');
     	this.partial("content/stories.template");
-    	//paintLoader();
 	}); 
 
 	this.get('#/photos', function(context) {
+		if (isPhotosLoaded){
+			return Photos.loadAll();
+		}
+		isPhotosLoaded = true;
 		setActiveLink("photos");
 		context.app.swap('');
-		this.partial("content/photos.template");
+		this.partial("content/photos.template",{callback: "Photos.loadAll();" });
+	});
+
+	this.get('#/photos/set/:setid', function(context) {
+		if (isPhotosLoaded){
+			return Photos.loadSet(this.params["setid"]);
+		}
+		isPhotosLoaded = true;
+		setActiveLink("photos");
+		context.app.swap('');
+		this.partial("content/photos.template",{callback: "Photos.loadSet('"+this.params["setid"]+"');"});
 	});
   
 });

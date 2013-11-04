@@ -1,4 +1,6 @@
-var loadedPhotos = function(){
+var Photos = function(){
+
+	var selectedSet = "set-all";
 
 	// Container of the gallery
 	var gallery = $("#photo-gallery");
@@ -10,7 +12,7 @@ var loadedPhotos = function(){
 	var totalPhotos = 0;
 	var checkFinishedLoading = function(){
 		if(totalPhotos == 0){
-			$(".loader").remove();
+			$(".loader").hide();
 		}
 	}
 
@@ -82,6 +84,40 @@ var loadedPhotos = function(){
 		return false;
 	}
 
+	var appendAlbum = function(info){
+		var element = $("<li />",{
+			class: "set-"+info.id
+		});
+		element.append($("<a />",{
+			href: "#/photos/set/"+info.id,
+			text: info.title._content
+		}));
+		if (selectedSet == "set-"+info.id){
+			element.addClass("active");
+		}
+		$("#album-list").append(element);
+	}
+
+	var appendAllPhotosAlbum = function(){
+		var element = $("<li />",{
+			class: "set-all"
+		});
+		element.append($("<a />",{
+			href: "#/photos",
+			text: "All photos"
+		}));
+		if (selectedSet == "set-all"){
+			element.addClass("active");
+		}
+		$("#album-list").append(element);	
+	}
+
+	var setSetSelected = function(className){
+		selectedSet = className;
+		$("#album-list > li").removeClass("active");
+		$("#album-list > li."+className).addClass("active");
+	}
+
 	// Start isotope
 	gallery.isotope({
 		itemSelector : '.photo-item',
@@ -94,27 +130,22 @@ var loadedPhotos = function(){
     gallery.isotope({ sortBy : 'index' });
 
 
-	//Load with Flickr's JSONp the sets and the pictures.
-	var flickrURL = "http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos"
-	flickrURL += "&user_id=101942945@N05";
-	flickrURL += "&format=json";
-	flickrURL += "&extras=tags";
-	flickrURL += "&api_key=29b46709a75f0bbc43c1ae75df395069";
-	flickrURL += "&jsoncallback=?";
+	//Load albums
+	
+	appendAllPhotosAlbum();
 
-	$.getJSON(flickrURL).then(function(result){
-		var photoList = result.photos.photo;
-		totalPhotos += photoList.length;
-		for (var i = 0; i < photoList.length; i++) {
-			if (! tagsInclude(photoList[i].tags, "nowebsite")){
-				appendPhoto(photoList[i],i);
-			}else{
-				totalPhotos -= 1;
-				checkFinishedLoading();
-			}
+	var flickerAlbumsUrl = "http://api.flickr.com/services/rest/?method=flickr.photosets.getList";
+	flickerAlbumsUrl += "&user_id=101942945@N05";
+	flickerAlbumsUrl += "&format=json";
+	flickerAlbumsUrl += "&api_key=29b46709a75f0bbc43c1ae75df395069";
+	flickerAlbumsUrl += "&jsoncallback=?";
+
+	$.getJSON(flickerAlbumsUrl).then(function(result){
+		var setList = result.photosets.photoset;
+		for (var i = 0; i < setList.length; i++) {
+			appendAlbum(setList[i]);
 		};
 	});
-
 
 	// jquery flickr like animation
 	 
@@ -185,6 +216,54 @@ var loadedPhotos = function(){
 	    
 	};
 
+	var loadPhotosFromUrl = function(flickrPhotoURL, listObtainer){
+		$(".loader").show();
+		$.getJSON(flickrPhotoURL).then(function(result){
+			var photoList = listObtainer(result);
+			totalPhotos += photoList.length;
+			for (var i = 0; i < photoList.length; i++) {
+				if (! tagsInclude(photoList[i].tags, "nowebsite")){
+					appendPhoto(photoList[i],i);
+				}else{
+					totalPhotos -= 1;
+					checkFinishedLoading();
+				}
+			};
+		});
+	}
 
+	var removeAll = function(){
+		gallery.isotope("remove", gallery.find(".photo-item"));
+	}
+
+
+	return {
+		loadAll: function(){
+			removeAll();
+			//Load with Flickr's JSONp the sets and the pictures.
+			var flickrPhotoURL = "http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos"
+			flickrPhotoURL += "&user_id=101942945@N05";
+			flickrPhotoURL += "&format=json";
+			flickrPhotoURL += "&extras=tags";
+			flickrPhotoURL += "&api_key=29b46709a75f0bbc43c1ae75df395069";
+			flickrPhotoURL += "&jsoncallback=?";
+
+			loadPhotosFromUrl(flickrPhotoURL, function(result){ return result.photos.photo;});
+			setSetSelected("set-all");
+		},
+		loadSet: function(setId){
+			removeAll();
+
+			var flickrPhotoURL = "http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos";
+			flickrPhotoURL += "&photoset_id="+setId;
+			flickrPhotoURL += "&format=json";
+			flickrPhotoURL += "&extras=tags";
+			flickrPhotoURL += "&api_key=29b46709a75f0bbc43c1ae75df395069";
+			flickrPhotoURL += "&jsoncallback=?";			
+
+			loadPhotosFromUrl(flickrPhotoURL, function(result){ return result.photoset.photo;});
+			setSetSelected("set-"+setId);
+		}
+	}
 
 }();

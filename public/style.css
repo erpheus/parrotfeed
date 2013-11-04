@@ -68,8 +68,8 @@ body {
 }
 
 .nav-pills > li > a {
-  font-size: 3em;
   color: #ADDDE4;
+  font-size: 3em; 
 }
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
@@ -262,6 +262,41 @@ body {
 
 body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom{
   margin-right: 0;
+}
+
+
+/* Albums menu */
+
+.album-list > li{
+  margin-right: 1em;
+  margin-bottom: 1em;
+  display: inline-block;
+  float: none;
+}
+
+.album-story{
+  padding: 1em;
+  padding-top: 0;
+  width: 80%;
+  margin-left: 10%;
+  text-align: center;
+}
+
+.album-story > .nav-pills > li > a {
+  color: #5D9FA8;
+  font-size: 1.25em; 
+  /*background-color: #5D9FA8;*/
+}
+
+.album-story > .nav-pills > li.active > a, .album-story > .nav-pills > li.active > a:hover, .album-story > .nav-pills > li.active > a:focus {
+    background-color: #5D9FA8;
+    color: #FFF;
+}
+
+.album-story > .nav > li > a:hover, .album-story > .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #EEE;
+    color: #5D9FA8;
 }
 
 
